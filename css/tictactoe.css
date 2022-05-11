@@ -49,6 +49,6 @@ button {
 }
 
 button:hover {
-    background: red;
+    background: yellow;
     transition: all 0.3s ease;
 }
