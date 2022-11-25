@@ -14,6 +14,7 @@ In snake I used the canvas API to create the graphics for the snake game. Simple
 
 Snake and the circle and cross were written using the JavaScript class, so we will notice class fields or this in this code. All games run responsively on devices with different screen resolutions.
 
+
 Have fun and get the highest scores!
 
 ## Built With
