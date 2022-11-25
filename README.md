@@ -6,6 +6,21 @@ An application that allows you to play simple games: Snake, Memory Game and Tic-
 * HTML
 * CSS
 
+## Demo
+https://viniski.github.io/Game-of-life-with-night-mode/
+
+![](
+screen-shot-menu.png)
+
+![](
+screen-shot-snake.png)
+
+![](
+screen-shot-memory-game.png)
+
+![](
+screen-shot-tictactoe.png)
+
 ## License
 This project is licensed under the MIT License
 
