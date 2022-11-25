@@ -25,19 +25,19 @@ Have fun and get the highest scores!
 ## Demo
 https://viniski.github.io/Game-Platform/
 
-###### Main menu
+#### Main menu
 ![](
 screen-shot-menu.png)
 
-###### Snake
+#### Snake
 ![](
 screen-shot-snake.png)
 
-###### Memory game
+#### Memory game
 ![](
 screen-shot-memory-game.png)
 
-###### Tic tac toe
+#### Tic tac toe
 ![](
 screen-shot-tictactoe.png)
 
