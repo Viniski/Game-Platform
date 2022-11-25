@@ -1,114 +1,82 @@
-let board = [
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', '']
-  ];
+window.onload = function () {
+    app.init();
+  };
   
-  let w; 
-  let h;
+  class App {
+    winningVariants = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    currentPlayer = "X";
+    selectedPosition = 0;
   
-  let ai = 'X';
-  let human = 'O';
-  let currentPlayer = human;
+    init() {
+      document
+        .querySelectorAll(".cell")
+        .forEach((cell) => cell.addEventListener("click", this.cellClick));
   
-  function setup() {
-    createCanvas(400, 400);
-    w = width / 3;
-    h = height / 3;
-    bestMove();
-  }
-  
-  function equals3(a, b, c) {
-    return a == b && b == c && a != '';
-  }
-  
-  function checkWinner() {
-    let winner = null;
-  
-    for (let i = 0; i < 3; i++) {
-      if (equals3(board[i][0], board[i][1], board[i][2])) {
-        winner = board[i][0];
-      }
+      document
+        .getElementById("restart-game")
+        .addEventListener("click", this.restartGame);
     }
   
-    for (let i = 0; i < 3; i++) {
-      if (equals3(board[0][i], board[1][i], board[2][i])) {
-        winner = board[0][i];
-      }
+    cellClick = (e) => {
+      this.playerTurn(e.target);
+    };
+  
+    initGame() {
+      this.selectedPosition = 0;
+      this.currentPlayer = "X";
+  
+      document.querySelectorAll(".cell").forEach((el) => (el.innerHTML = ""));
     }
   
-    if (equals3(board[0][0], board[1][1], board[2][2])) {
-      winner = board[0][0];
-    }
-    if (equals3(board[2][0], board[1][1], board[0][2])) {
-      winner = board[2][0];
+    playerTurn(el) {
+      if (el.innerHTML == "X" || el.innerHTML == "O") return;
+      el.innerHTML = this.currentPlayer;
+  
+      this.currentPlayer = this.currentPlayer == "X" ? "O" : "X";
+  
+      this.selectedPosition++;
+      this.checkWinner();
     }
   
-    let openSpots = 0;
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (board[i][j] == '') {
-          openSpots++;
+    checkWinner() {
+      for (let i = 0; i < this.winningVariants.length; i++) {
+        const variant = this.winningVariants[i];
+        const a = this.getCellValue(variant[0]);
+        const b = this.getCellValue(variant[1]);
+        const c = this.getCellValue(variant[2]);
+  
+        if (a == "" || b == "" || c == "") continue;
+  
+        if (a == b && b == c) {
+          this.setWinner(a);
+          this.restartGame();
         }
       }
+  
+      if (this.selectedPosition === 9) alert("REMIS, wybierz Reset gry");
     }
   
-    if (winner == null && openSpots == 0) {
-      return 'tie';
-    } else {
-      return winner;
+    setWinner(player) {
+      alert(`Koniec gry! Zwycięzca to ${player}`);
     }
-  }
   
-  function mousePressed() {
-    if (currentPlayer == human) {
-      // Human make turn
-      let i = floor(mouseX / w);
-      let j = floor(mouseY / h);
-      // If valid turn
-      if (board[i][j] == '') {
-        board[i][j] = human;
-        currentPlayer = ai;
-        bestMove();
-      }
+    restartGame = () => {
+      this.initGame();
+    };
+  
+    getCellValue(index) {
+      return document.querySelector(`.cell[data-index="${index}"]`).innerHTML;
     }
   }
   
-  function draw() {
-    background(255);
-    strokeWeight(4);
+  const app = new App();
   
-    line(w, 0, w, height);
-    line(w * 2, 0, w * 2, height);
-    line(0, h, width, h);
-    line(0, h * 2, width, h * 2);
-  
-    for (let j = 0; j < 3; j++) {
-      for (let i = 0; i < 3; i++) {
-        let x = w * i + w / 2;
-        let y = h * j + h / 2;
-        let spot = board[i][j];
-        textSize(32);
-        let r = w / 4;
-        if (spot == human) {
-          noFill();
-          ellipse(x, y, r * 2);
-        } else if (spot == ai) {
-          line(x - r, y - r, x + r, y + r);
-          line(x + r, y - r, x - r, y + r);
-        }
-      }
-    }
-  
-    let result = checkWinner();
-    if (result != null) {
-      noLoop();
-      let resultP = createP('');
-      resultP.style('font-size', '32pt');
-      if (result == 'tie') {
-        resultP.html('Tie!');
-      } else {
-        resultP.html(`${result} wins!`);
-      }
-    }
-  }

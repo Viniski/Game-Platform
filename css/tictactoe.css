@@ -1,54 +1,87 @@
 * {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Tahoma, sans-serif;
 }
 
-h3 {
-    text-transform: uppercase;
-    text-align: center;
-    display: block;
-    padding: 15px;
+h1 {
+  display: block;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .game-grid {
-    margin: auto;
-    width: 70vh;
-    height: 70vh;
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
+  display: grid;
+  width: 70vh;
+  height: 70vh;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 5px;
+  margin: auto;
 }
 
 .cell {
-    color: green;
-    cursor: pointer;
-    display: block;
-    border: 3px solid red;
-    width: auto;
-    height: auto;
-    text-align: center;
-    font-size: 15vh;
+  display: block;
+  width: auto;
+  height: auto;
+  font-size: 15vh;
+  border: 3px solid red;
+  text-align: center;
+  color: red;
+  cursor: pointer;
 }
 
 #restart-game {
-    text-align: center;
-    display: block;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  text-align: center;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 button {
-    padding: 12px 24px;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    background: black;
-    margin-left: 16px;
-    color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  margin-left: 16px;
+  background: black;
+  color: white;
 }
 
 button:hover {
-    background: yellow;
-    transition: all 0.3s ease;
+  background: red;
+  transition: all 0.4s ease;
+}
+
+@media (max-width: 990px) {
+  h1 {
+    margin-top: 10vh;
+  }
+
+  .game-grid {
+    width: 50vh;
+    height: 50vh;
+    margin: 10vh auto;
+  }
+
+  .cell {
+    font-size: 10vh;
+  }
+}
+
+@media (max-width: 672px) {
+  h1 {
+    margin-top: 10vh;
+  }
+
+  .game-grid {
+    width: 40vh;
+    height: 40vh;
+    grid-gap: 4px;
+    margin: 10vh auto;
+  }
+
+  .cell {
+    font-size: 10vh;
+  }
 }
